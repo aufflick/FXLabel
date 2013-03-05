@@ -580,16 +580,15 @@
     if (needsMask)
     {
         //draw mask
-        CGContextSaveGState(context);
+        UIGraphicsBeginImageContextWithOptions(rect.size, NO, _oversampling);
+        CGContextRef alphaContext = UIGraphicsGetCurrentContext();
+
         [self FXLabel_drawTextInRect:textRect withFont:font];
-        CGContextRestoreGState(context);
         
         // Create an image mask from what we've drawn so far
-        alphaMask = CGBitmapContextCreateImage(context);
+        alphaMask = CGBitmapContextCreateImage(alphaContext);
         
-        //clear the context
-        //TODO: I'm pretty sure it's cheaper to create and throw away a bitmap context than to clear...
-        CGContextClearRect(context, textRect);
+        UIGraphicsEndImageContext();
     }
     
     if (hasShadow)
