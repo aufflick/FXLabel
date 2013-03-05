@@ -33,6 +33,7 @@
 
 #import "FXLabel.h"
 
+#import <QuartzCore/QuartzCore.h>
 
 #import <Availability.h>
 #if !__has_feature(objc_arc)
@@ -210,6 +211,9 @@
 
 
 @interface FXLabel ()
+{
+    CALayer * contentLayer;
+}
 
 @property (nonatomic, assign) NSUInteger minSamples;
 @property (nonatomic, assign) NSUInteger maxSamples;
@@ -233,6 +237,10 @@
     }
     _oversampling = _minSamples;
     _allowOrphans = YES;
+    
+    contentLayer = [CALayer layer];
+    contentLayer.frame = self.bounds;
+    [self.layer addSublayer:contentLayer];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -252,6 +260,11 @@
         [self setUp];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    contentLayer.frame = self.bounds;
 }
 
 - (void)setInnerShadowOffset:(CGSize)offset
@@ -575,6 +588,7 @@
         alphaMask = CGBitmapContextCreateImage(context);
         
         //clear the context
+        //TODO: I'm pretty sure it's cheaper to create and throw away a bitmap context than to clear...
         CGContextClearRect(context, textRect);
     }
     
@@ -652,7 +666,12 @@
     {
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        [image drawInRect:rect];
+
+        contentLayer.contents = (id)[image CGImage];
+    }
+    else
+    {
+        contentLayer.contents = nil;
     }
 }
 
