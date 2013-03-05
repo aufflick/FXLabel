@@ -32,7 +32,7 @@
 
 
 #import "FXLabel.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 #import <Availability.h>
 #if !__has_feature(objc_arc)
@@ -487,6 +487,9 @@
 
 
 @interface FXLabel ()
+{
+    CALayer * subcontextLayer;
+}
 
 @property (nonatomic, assign) NSUInteger minSamples;
 @property (nonatomic, assign) NSUInteger maxSamples;
@@ -510,6 +513,10 @@
     }
     _oversampling = _minSamples;
     _allowOrphans = YES;
+    
+    subcontextLayer = [CALayer layer];
+    subcontextLayer.frame = self.bounds;
+    [self.layer addSublayer:subcontextLayer];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -529,6 +536,11 @@
         [self setUp];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    subcontextLayer.frame = self.bounds;
 }
 
 - (void)setShadowBlur:(CGFloat)blur
@@ -917,7 +929,8 @@
         alphaMask = CGBitmapContextCreateImage(context);
         
         //clear the context
-        CGContextClearRect(context, textRect);
+        if (!subcontext)
+            CGContextClearRect(context, textRect);
     }
     
     if (hasShadow)
@@ -1003,7 +1016,12 @@
     {
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        [image drawInRect:rect];
+        
+        subcontextLayer.contents = (id)[image CGImage];
+    }
+    else
+    {
+        subcontextLayer.contents = nil;
     }
 }
 
