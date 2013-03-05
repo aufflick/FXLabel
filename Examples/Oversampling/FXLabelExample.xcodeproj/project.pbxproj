@@ -18,6 +18,7 @@
 		01FAC1161400668500B63C5B /* FXLabelExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FAC1151400668500B63C5B /* FXLabelExampleViewController.m */; };
 		01FAC1191400668500B63C5B /* FXLabelExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FAC1171400668500B63C5B /* FXLabelExampleViewController.xib */; };
 		01FF021B146985FE00765E29 /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FF021A146985FE00765E29 /* FXLabel.m */; };
+		64EEFD8216E59E7500409C95 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64EEFD8116E59E7500409C95 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		01FAC1181400668500B63C5B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FXLabelExampleViewController.xib; sourceTree = "<group>"; };
 		01FF0219146985FE00765E29 /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
 		01FF021A146985FE00765E29 /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
+		64EEFD8116E59E7500409C95 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64EEFD8216E59E7500409C95 /* QuartzCore.framework in Frameworks */,
 				01FAC1001400668500B63C5B /* UIKit.framework in Frameworks */,
 				01FAC1021400668500B63C5B /* Foundation.framework in Frameworks */,
 				01FAC1041400668500B63C5B /* CoreGraphics.framework in Frameworks */,
@@ -75,6 +78,7 @@
 		01FAC0FE1400668500B63C5B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				64EEFD8116E59E7500409C95 /* QuartzCore.framework */,
 				01FAC0FF1400668500B63C5B /* UIKit.framework */,
 				01FAC1011400668500B63C5B /* Foundation.framework */,
 				01FAC1031400668500B63C5B /* CoreGraphics.framework */,
